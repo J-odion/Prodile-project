@@ -5,86 +5,79 @@ import { Form, FormField } from "@/components/ui/form";
 import z from 'zod';
 import { useRouter } from 'next/router';
 import { zodResolver } from "@hookform/resolvers/zod";
-import { signInFormSchema } from '@/lib/formSchema';
+import { confirmEmailSchema } from '@/lib/formSchema';
 import { useToast } from '@/components/ui/use-toast';
 import FormRender from '@/components/FormRender';
 import CustomButton from '@/components/CustomButton';
 import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+
 // import GoogleSignInButton from '@/components/GoogleSignInButton';
 
-const Login = () => {
+const ConfirmEmail = () => {
     const { toast } = useToast();
     const router = useRouter();
 
-    const form = useForm<z.infer<typeof signInFormSchema>>({
-        resolver: zodResolver(signInFormSchema),
+    const form = useForm<z.infer<typeof confirmEmailSchema>>({
+        resolver: zodResolver(confirmEmailSchema),
         defaultValues: {
-            email: "",
-            password: "",
+            telephone: "",
         },
     });
 
-    const onSubmit = async (data: z.infer<typeof signInFormSchema>) => {
+    const handleBacktoLogin = () => {
+        router.push('/auth/login')
+    }
+
+    const onSubmit = async (data: z.infer<typeof confirmEmailSchema>) => {
         console.log(data);
         toast({
-            title: 'Login successful',
-            description: 'You have successfully logged in',
+            title: 'Reset password successful',
+            description: 'You have successfully reset your password',
             variant: 'default',
         });
-        router.push('/dashboard');
+        router.push('/auth/forgot-password/success');
     }
 
     return (
         <div className="flex h-screen">
             <div className=" w-2/3 flex flex-col justify-center px-[16rem]">
-                <h1 className="text-4xl font-semibold mb-2 text-[#0C1421]">Welcome back 👋</h1>
-                <p className="text-[--prodile-text-darkBlue] font-normal text-xl mb-6">
-                    Today is a new day. It's your day. You shape it.
-                    Sign in to start managing your projects.
+                <h1 className="text-4xl font-semibold mb-2 text-[#0C1421]">OTP Verification</h1>
+                <p className="text-[--prodile-text-darkBlue] font-normal text-xl mt-4 mb-6 ">
+                A code has been sent to <span className='text-[--prodile-yellow]'>********70</span>
                 </p>
 
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 mt-8">
                         <FormField
                             control={form.control}
-                            name="email"
+                            name="telephone"
                             render={({ field }) => (
                                 <FormRender
-                                    placeholder="Enter email"
+                                    placeholder="Phone number"
                                     field={field}
-                                    label='Email Address'
+                                    label='Phone number'
                                 />
                             )}
                         />
-                        <FormField
-                            control={form.control}
-                            name="password"
-                            render={({ field }) => (
-                                <FormRender
-                                    placeholder="Enter password"
-                                    field={field}
-                                    label='Password'
-                                    type="password"
-                                />
-                            )}
-                        />
-                        <CustomButton type="submit" className="w-full bg-[--prodile-yellow] h-[2.7em] rounded-xl text-xl font-normal text-white py-4  mt-10">
-                            Login
+
+                        <div className='flex flex-col gap-4'>
+                        <CustomButton type="submit" className="w-full bg-[--prodile-yellow] h-[3em] text-white py-4 rounded-lg mt-10">
+                            Send code
                         </CustomButton>
+                        <Button className='w-full bg-[--prodile-blue]' onClick={handleBacktoLogin}>Back to login</Button>
+                        </div>
                     </form>
                 </Form>
 
-                <div className="mt-4 flex items-center justify-end">
-                    <Link href='/auth/forgot-password' className="text-sm text-blue-500 hover:underline">Forgot Password?</Link>
-                </div>
-                <div className="mt-6">
-                    {/* <GoogleSignInButton /> */}
-                    Google signin button component
-                </div>
-                <div className="mt-4 text-center">
-                    <p className="text-lg font-normal">
-                        <span className='text-[--prodile-text-darkBlue]'>Don't you have an account? </span><Link href="/auth/signup" className="text-blue-500 hover:underline">Sign up</Link>
-                    </p>
+
+
+                <div className="text-center flex justify-center mt-14">
+                    <ul className='flex gap-6 items-center'>
+                        <li>Terms and conditions</li>
+                        <li className='bg-black h-[5px] w-[5px] rounded-full'></li>
+                        <li>Privacy policy</li>
+                    </ul>
                 </div>
             </div>
 
@@ -106,4 +99,4 @@ const Login = () => {
     )
 }
 
-export default Login
+export default ConfirmEmail
