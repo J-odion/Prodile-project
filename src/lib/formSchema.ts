@@ -43,3 +43,14 @@ export const confirmEmailSchema = z.object({
     message: "Phone number must be at least 11 character(s) long",
   }),
 })
+
+export const emailVerificationSchema = z.object({
+  otp_code: z
+    .string()
+    .min(6, {
+      message: "otp must contain at least 6 character(s)",
+    })
+    .max(6, {
+      message: "otp must contain at most 6 character(s)",
+    }),
+});
