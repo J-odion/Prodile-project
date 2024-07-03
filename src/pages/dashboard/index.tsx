@@ -12,7 +12,7 @@ import { Separator } from "@/components/ui/separator";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
 
-const notifications = {
+export const notifications = {
   count: 2,
   results: [
     {

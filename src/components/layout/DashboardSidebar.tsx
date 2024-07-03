@@ -10,6 +10,7 @@ import {
   Users,
   UserCircle,
   Grid2X2,
+  Scroll,
 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -65,19 +66,19 @@ const DashboardSidebar = ({ children }: DashboardSidebarProps) => {
                 </li>
               </Link>
 
-              <Link href="/dashboard/admin/courses">
+              <Link href="/dashboard/productive-units">
                 <li
                   className={
-                    route === "/dashboard/admin/courses"
-                      ? "bg-[#1C1C1C0D] py-3 pl-10 text-[#1C1C1C] rounded-xl"
-                      : "my-1 py-3 pl-10 hover:bg-[#1C1C1C0D] hover:text-[#1C1C1C] rounded-xl"
+                    route === "/dashboard/productive-units"
+                    ? "bg-[--prodile-yellow] py-3 pl-10 text-white rounded-xl font-semibold text-sm"
+                    : "my-1 py-3 pl-10 hover:bg-[--prodile-yellow] hover:text-[#1C1C1C] font-semibold text-sm rounded-xl"
                   }
                 >
                   <div className="flex items-center">
                     <span className="mr-3">
-                      <BookOpen size="20" />
+                      <Scroll size="20" />
                     </span>
-                    Product units
+                    Productive units
                   </div>
                 </li>
               </Link>
