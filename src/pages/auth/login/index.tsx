@@ -93,7 +93,7 @@ const Login = () => {
                 <div className="absolute inset-0 flex flex-col items-center text-white p-8 my-14 space-y-40">
                     <Image src="/images/prodile-logo-white.svg" alt="prodile logo" height={60} width={260} />
                     <div className='flex flex-col items-center gap-4'>
-                    <h1 className="text-5xl font-bold mt-8 text-[--prodile-yellow] capitalize">Agriculture matter</h1>
+                    <h1 className="text-4xl font-bold mt-8 text-[--prodile-yellow] capitalize">Agriculture matter</h1>
                     <h3 className="text-2xl font-semibold text-[44px] mt-4">Good production</h3>
                     <p className="text-center mt-4 text-[#BDBDBD] font-normal text-lg">
                         Dissuade ecstatic and properly saw entirely sir why laughter endeavor.
