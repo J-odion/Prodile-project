@@ -47,10 +47,10 @@ export const confirmEmailSchema = z.object({
 export const emailVerificationSchema = z.object({
   otp_code: z
     .string()
-    .min(6, {
-      message: "otp must contain at least 6 character(s)",
+    .min(5, {
+      message: "otp must contain at least 5 character(s)",
     })
-    .max(6, {
-      message: "otp must contain at most 6 character(s)",
+    .max(5, {
+      message: "otp must contain at most 5 character(s)",
     }),
 });

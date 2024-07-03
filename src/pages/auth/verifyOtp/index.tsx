@@ -42,7 +42,7 @@ const ConfirmEmail = () => {
       description: "You have successfully reset your password",
       variant: "default",
     });
-    router.push("/auth/forgot-password/success");
+    router.push("/auth/verifyOtp/success");
   };
 
   return (
