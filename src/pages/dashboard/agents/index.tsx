@@ -59,7 +59,7 @@ const Agents: NextPageWithLayout = () => {
               className="border-[#C2C2C2] border-2"
             />
             <div className="flex gap-2">
-              <Link href="/dashboard/admin/account/profile">
+              <Link href="/dashboard/settings">
                 <Avatar>
                   <AvatarImage
                     src="https://github.com/shadcn.png"

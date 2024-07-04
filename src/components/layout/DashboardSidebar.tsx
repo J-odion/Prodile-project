@@ -12,6 +12,7 @@ import {
   Grid2X2,
   Scroll,
   Proportions,
+  Settings,
 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -118,18 +119,18 @@ const DashboardSidebar = ({ children }: DashboardSidebarProps) => {
                 </li>
               </Link>
 
-              <h2>General</h2>
-              <Link href="/dashboard/admin/transactions">
+              <h2 className="text-center text-[#222222] font-semibold text-[13px] uppercase my-3">General</h2>
+              <Link href="/dashboard/settings">
                 <li
                   className={
-                    route === "/dashboard/admin/transactions"
-                      ? "bg-[#1C1C1C0D] py-3 pl-10 text-[#1C1C1C] rounded-xl"
-                      : "my-1 py-3 pl-10 hover:bg-[#1C1C1C0D] hover:text-[#1C1C1C] rounded-xl"
+                    route === "/dashboard/settings"
+                    ? "bg-[--prodile-yellow] py-3 pl-10 text-white rounded-xl font-semibold text-sm"
+                    : "my-1 py-3 pl-10 hover:bg-[--prodile-yellow] hover:text-[#1C1C1C] font-semibold text-sm rounded-xl"
                   }
                 >
                   <div className="flex items-center">
                     <span className="mr-3">
-                      <BookText size="20" />
+                      <Settings size="20" />
                     </span>
                     Settings
                   </div>

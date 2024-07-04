@@ -15,7 +15,7 @@ import { seedings } from "@/data/data";
 import Datapagination from "../pagination/Data-Pagination";
 
 const itemsPerPage = 2;
-const SeedingsCard = () => {
+const Feed = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -27,7 +27,7 @@ const SeedingsCard = () => {
         <div className="grid grid-cols-5 gap-6 mb-8 items-center">
           <div className="flex w-full">
             <h2 className="font-bold text-2xl text-[--prodile-yellow]">
-              Seedings
+              Feed
             </h2>{" "}
             <span>
               <ArrowRight className=" w-14 text-[--prodile-yellow]" />
@@ -104,4 +104,4 @@ const SeedingsCard = () => {
   );
 };
 
-export default SeedingsCard;
+export default Feed;

@@ -11,6 +11,11 @@ import { notifications } from "..";
 import { Button } from "@/components/ui/button";
 import MetricsCard from "@/components/Cards/MetricsCard";
 import SeedingsCard from "@/components/Cards/SeedingsCard";
+import FertilizerCard from "@/components/Cards/FertilizerCard";
+import ChemicalsCard from "@/components/Cards/ChemicalCard";
+import StockCard from "@/components/Cards/StockCard";
+import Machinery from "@/components/Cards/Machinery";
+import Feed from "@/components/Cards/Feed";
 
 const Resources: NextPageWithLayout = () => {
   return (
@@ -106,6 +111,11 @@ const Resources: NextPageWithLayout = () => {
             />
         </div>
         <SeedingsCard />
+        <FertilizerCard />
+        <ChemicalsCard />
+        <StockCard />
+        <Machinery />
+        <Feed />
       </div>
     </DashboardSidebar>
   );
