@@ -72,3 +72,69 @@ export const users = [
       agent: 'Emmanuel Okafor',
     }
   ]
+
+  export const agents = [
+    {
+      id: 1,
+      name: 'Emmanuel Okafor',
+      category: 'Agent',
+      industry: 'Agriculture',
+      location: 'Gwarimpa, Abuja',
+    },
+    {
+      id: 2,
+      name: 'Ella Johnson',
+      category: 'Supervisor',
+      industry: 'Agriculture',
+      location: 'Gwarimpa, Abuja',
+    },
+    {
+      id: 3,
+      name: 'Emmanuel Okafor',
+      category: 'Admin',
+      industry: 'Agriculture',
+      location: 'Gwarimpa, Abuja',
+    },
+    {
+      id: 4,
+      name: 'Emmanuel Okafor',
+      category: 'Manager',
+      industry: 'Agriculture',
+      location: 'Gwarimpa, Abuja',
+    },
+    {
+      id: 5,
+      name: 'Emmanuel Okafor',
+      category: 'Director',
+      industry: 'Agriculture',
+      location: 'Gwarimpa, Abuja',
+    },
+    {
+      id: 6,
+      name: 'Emmanuel Okafor',
+      category: 'Agent',
+      industry: 'Agriculture',
+      location: 'Gwarimpa, Abuja',
+    },
+    {
+      id: 7,
+      name: 'Emmanuel Okafor',
+      category: 'Manager',
+      industry: 'Agriculture',
+      location: 'Gwarimpa, Abuja',
+    },
+    {
+      id: 8,
+      name: 'Emmanuel Okafor',
+      category: 'Agent',
+      industry: 'Agriculture',
+      location: 'Gwarimpa, Abuja',
+    },
+    {
+      id: 9,
+      name: 'Emmanuel Okafor',
+      category: 'Director',
+      industry: 'Agriculture',
+      location: 'Gwarimpa, Abuja',
+    }
+  ]

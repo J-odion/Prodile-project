@@ -53,6 +53,7 @@ import {
 } from "@/components/ui/table";
 import Datapagination from "@/components/pagination/Data-Pagination";
 import AddIndividualModal from "@/components/modals/ProductiveUnit/AddIndividualModal";
+import AddCoporateModal from "@/components/modals/ProductiveUnit/AddCorporateModal";
 
 
 
@@ -62,6 +63,7 @@ const ProductiveUnits: NextPageWithLayout = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
   const [showModal, setShowModal] = useState(false);
+  const [showCoporateModal, setShowCoporateModal] = useState(false);
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -69,6 +71,10 @@ const ProductiveUnits: NextPageWithLayout = () => {
 
   const handleShowModal = () => {
     setShowModal(true);
+  }
+
+  const handleShowCoporateModal = () => {
+    setShowCoporateModal(true);
   }
 
   return (
@@ -183,7 +189,7 @@ const ProductiveUnits: NextPageWithLayout = () => {
                           <User className="mr-2 h-4 w-4" />
                           <span>Individual Productive units</span>
                         </DropdownMenuItem>
-                        <DropdownMenuItem>
+                        <DropdownMenuItem onClick={handleShowCoporateModal}>
                           <CreditCard className="mr-2 h-4 w-4" />
                           <span>Corporate Productive units</span>
                         </DropdownMenuItem>
@@ -268,6 +274,7 @@ const ProductiveUnits: NextPageWithLayout = () => {
         onPageChange={setCurrentPage}
       />
       <AddIndividualModal open={showModal} setOpen={setShowModal} title="Add productive units" />
+      <AddCoporateModal open={showCoporateModal} setOpen={setShowCoporateModal} title="Add Productive Units" />
     </DashboardSidebar>
   );
 };
