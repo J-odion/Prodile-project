@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   PieChart,
   ChevronRight,
@@ -19,9 +19,47 @@ import { useRouter } from "next/router";
 // import { Skeleton } from "@/components/ui/skeleton";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Image from "next/image";
-// import { useStorage } from "@/lib/useStorage";
+import { Check, ChevronsUpDown } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { Input } from "../ui/input";
+import { UserNav } from "./UserNav";
 
-// ill use this for the avatar
+const frameworks = [
+  {
+    value: "next.js",
+    label: "Next.js",
+  },
+  {
+    value: "sveltekit",
+    label: "SvelteKit",
+  },
+  {
+    value: "nuxt.js",
+    label: "Nuxt.js",
+  },
+  {
+    value: "remix",
+    label: "Remix",
+  },
+  {
+    value: "astro",
+    label: "Astro",
+  },
+];
 
 type DashboardSidebarProps = React.PropsWithChildren & {
   className?: string;
@@ -30,8 +68,8 @@ type DashboardSidebarProps = React.PropsWithChildren & {
 const DashboardSidebar = ({ children }: DashboardSidebarProps) => {
   const router = useRouter();
   const { route } = useRouter();
-//   const user = useStorage.getItem("firstName");
-//   console.log("User", user);
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState("");
 
   const handleLogout = () => {
     router.push("/");
@@ -39,110 +77,125 @@ const DashboardSidebar = ({ children }: DashboardSidebarProps) => {
 
   return (
     <>
-      <aside className="relative">
-        <div className="fixed hidden h-screen w-64 bg-white lg:flex border-r">
-
-          <div>
-            <div className="flex items-center gap-3 justify-center align-middle h-20 py-[10px]">
-              <Image src="/images/prodile-logo-yellow.svg" alt='prodile yellow logo' width={150} height={50} />
-            </div>
-
-
-            {/* <nav className="flex-grow"> */}
-            <h2 className="text-center text-[#222222] font-semibold text-[13px] uppercase">Menu</h2>
-            <ul className="flex flex-col py-4 px-4">
-              <Link href="/dashboard">
-                <li
-                  className={
-                    route === "/dashboard"
-                      ? "bg-[--prodile-yellow] py-3 pl-10 text-white rounded-xl font-semibold text-sm"
-                      : "my-1 py-3 pl-10 hover:bg-[--prodile-yellow] hover:text-[#1C1C1C] font-semibold text-sm rounded-xl"
-                  }
+      <nav className=" fixed w-full z-50">
+        <div className="hidden h-30 w-full bg-white lg:flex border-b items-center px-6 justify-between">
+          <div className="flex items-center">
+            <Popover open={open} onOpenChange={setOpen}>
+              <PopoverTrigger asChild>
+                <Button
+                  variant="outline"
+                  role="combobox"
+                  aria-expanded={open}
+                  className="w-[200px] justify-between"
                 >
-                  <div className="flex items-center">
-                    <span className="mr-3">
-                      <Grid2X2 size="20" />
-                    </span>
-                    Overview
-                  </div>
-                </li>
-              </Link>
+                  {value
+                    ? frameworks.find((framework) => framework.value === value)
+                        ?.label
+                    : "Select role..."}
+                  <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-[200px] p-0">
+                <Command>
+                  <CommandInput placeholder="Search framework..." />
+                  <CommandList>
+                    <CommandEmpty>No framework found.</CommandEmpty>
+                    <CommandGroup>
+                      {frameworks.map((framework) => (
+                        <CommandItem
+                          key={framework.value}
+                          value={framework.value}
+                          onSelect={(currentValue) => {
+                            setValue(
+                              currentValue === value ? "" : currentValue
+                            );
+                            setOpen(false);
+                          }}
+                        >
+                          <Check
+                            className={cn(
+                              "mr-2 h-4 w-4",
+                              value === framework.value
+                                ? "opacity-100"
+                                : "opacity-0"
+                            )}
+                          />
+                          {framework.label}
+                        </CommandItem>
+                      ))}
+                    </CommandGroup>
+                  </CommandList>
+                </Command>
+              </PopoverContent>
+            </Popover>
+            <div>
+              <ul className="flex py-4 px-4 gap-4">
+                <Link href="/dashboard">
+                  <li
+                    className={
+                      route === "/dashboard"
+                        ? "text-[--prodile-yellow] py-3 rounded-xl font-semibold text-sm"
+                        : " py-3 pl-10 hover:underline hover:text-[#1C1C1C] font-semibold text-sm rounded-xl"
+                    }
+                  >
+                    <div className="flex items-center">Overview</div>
+                  </li>
+                </Link>
 
-              <Link href="/dashboard/productive-units">
-                <li
-                  className={
-                    route === "/dashboard/productive-units"
-                    ? "bg-[--prodile-yellow] py-3 pl-10 text-white rounded-xl font-semibold text-sm"
-                    : "my-1 py-3 pl-10 hover:bg-[--prodile-yellow] hover:text-[#1C1C1C] font-semibold text-sm rounded-xl"
-                  }
-                >
-                  <div className="flex items-center">
-                    <span className="mr-3">
-                      <Scroll size="20" />
-                    </span>
-                    Productive units
-                  </div>
-                </li>
-              </Link>
+                <Link href="/dashboard/productive-units">
+                  <li
+                    className={
+                      route === "/dashboard/productive-units"
+                        ? "text-[--prodile-yellow] py-3 rounded-xl font-semibold text-sm"
+                        : " py-3 hover:underline hover:text-[#1C1C1C] font-semibold text-sm rounded-xl"
+                    }
+                  >
+                    <div className="flex items-center">Productive units</div>
+                  </li>
+                </Link>
 
-              <Link href="/dashboard/agents">
-                <li
-                  className={
-                    route === "/dashboard/agents"
-                    ? "bg-[--prodile-yellow] py-3 pl-10 text-white rounded-xl font-semibold text-sm"
-                    : "my-1 py-3 pl-10 hover:bg-[--prodile-yellow] hover:text-[#1C1C1C] font-semibold text-sm rounded-xl"
-                  }
-                >
-                  <div className="flex items-center">
-                    <span className="mr-3">
-                      <Users size="20" />
-                    </span>
-                    Agents
-                  </div>
-                </li>
-              </Link>
+                <Link href="/dashboard/agents">
+                  <li
+                    className={
+                      route === "/dashboard/agents"
+                        ? "text-[--prodile-yellow] py-3 rounded-xl font-semibold text-sm"
+                        : " py-3 hover:underline hover:text-[#1C1C1C] font-semibold text-sm rounded-xl"
+                    }
+                  >
+                    <div className="flex items-center">Agents</div>
+                  </li>
+                </Link>
 
-              <Link href="/dashboard/resources">
-                <li
-                  className={
-                    route === "/dashboard/resources"
-                    ? "bg-[--prodile-yellow] py-3 pl-10 text-white rounded-xl font-semibold text-sm"
-                    : "my-1 py-3 pl-10 hover:bg-[--prodile-yellow] hover:text-[#1C1C1C] font-semibold text-sm rounded-xl"
-                  }
-                >
-                  <div className="flex items-center">
-                    <span className="mr-3">
-                      <Proportions size="20" />
-                    </span>
-                    Resources
-                  </div>
-                </li>
-              </Link>
+                <Link href="/dashboard/resources">
+                  <li
+                    className={
+                      route === "/dashboard/resources"
+                        ? "text-[--prodile-yellow] py-3 rounded-xl font-semibold text-sm"
+                        : " py-3 hover:underline hover:text-[#1C1C1C] font-semibold text-sm rounded-xl"
+                    }
+                  >
+                    <div className="flex items-center">Resources</div>
+                  </li>
+                </Link>
 
-              <h2 className="text-center text-[#222222] font-semibold text-[13px] uppercase my-3">General</h2>
-              <Link href="/dashboard/settings">
-                <li
-                  className={
-                    route === "/dashboard/settings"
-                    ? "bg-[--prodile-yellow] py-3 pl-10 text-white rounded-xl font-semibold text-sm"
-                    : "my-1 py-3 pl-10 hover:bg-[--prodile-yellow] hover:text-[#1C1C1C] font-semibold text-sm rounded-xl"
-                  }
-                >
-                  <div className="flex items-center">
-                    <span className="mr-3">
-                      <Settings size="20" />
-                    </span>
-                    Settings
-                  </div>
-                </li>
-              </Link>
-            </ul>
-            {/* </nav> */}
-            <div
-              className="fixed bottom-10 pl-10 text-[#959190]"
-              style={{ cursor: "pointer" }}
-            >
+                <Link href="/dashboard/settings">
+                  <li
+                    className={
+                      route === "/dashboard/settings"
+                        ? "text-[--prodile-yellow] py-3 rounded-xl font-semibold text-sm"
+                        : " py-3 hover:underline hover:text-[#1C1C1C] font-semibold text-sm rounded-xl"
+                    }
+                  >
+                    <div className="flex items-center">Settings</div>
+                  </li>
+                </Link>
+              </ul>
+              {/* </nav> */}
               <div
+                className="fixed bottom-10  text-[#959190]"
+                style={{ cursor: "pointer" }}
+              >
+                {/* <div
                 className="flex items-center text-[#D06B0D]"
                 onClick={handleLogout}
               >
@@ -150,17 +203,26 @@ const DashboardSidebar = ({ children }: DashboardSidebarProps) => {
                   <LogOut size="20" color="#D06B0D" />
                 </span>
                 Logout
+              </div> */}
               </div>
             </div>
+          </div>
+          <div className="flex items-center gap-6">
+            <Input
+              type="search"
+              placeholder="Search..."
+              className="md:w-[100px] lg:w-[300px]"
+            />
+            <UserNav />
           </div>
         </div>
         {/* <div className="h-full min-h-screen w-full pl-5 pr-5 pt-12 py-10 md:pt-12 lg:min-h-40 lg:pl-[32rem] lg:pr-10">
                 {children}
             </div> */}
-        <div className="h-full min-h-screen w-full pl-5 pr-5 pt-12 py-10 md:pt-10 lg:min-h-40 lg:pl-[19rem] lg:pr-2 pb-20">
+        {/* <div className="h-full min-h-screen w-full pl-5 pr-5 pt-12 py-10 md:pt-10 lg:min-h-40 lg:pl-[19rem] lg:pr-2 pb-20">
           {children}
-        </div>
-      </aside>
+        </div> */}
+      </nav>
     </>
   );
 };
