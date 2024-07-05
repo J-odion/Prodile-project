@@ -12,9 +12,10 @@ import HeaderCard from "@/components/Cards/Settings/HeaderCard";
 
 const Settings: NextPageWithLayout = () => {
   return (
-    <DashboardSidebar>
+    <>
+    <DashboardSidebar />
         <HeaderCard />
-    </DashboardSidebar>
+    </>
   )
 }
 

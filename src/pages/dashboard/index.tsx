@@ -11,6 +11,12 @@ import NotificationModal from "@/components/layout/NotificationModal";
 import { Separator } from "@/components/ui/separator";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/components/ui/tabs";
 
 export const notifications = {
   count: 2,
@@ -32,8 +38,9 @@ export const notifications = {
 
 const Overview: NextPageWithLayout = () => {
   return (
-    <DashboardSidebar>
-      <div className="w-full p-6">
+    <>
+    <DashboardSidebar />
+      <div className="w-full px-6 pt-28">
         <div className="flex justify-between items-center mb-8">
           <div>
             <h1 className="text-4xl font-semibold text-[#404040]">Dashboard</h1>
@@ -41,75 +48,51 @@ const Overview: NextPageWithLayout = () => {
               Get summary of your weekly online transactions here.
             </p>
           </div>
-          <input
-            type="text"
-            placeholder="Search"
-            className="border rounded-lg px-4 py-2"
-          />
-          <div className="flex justify-center gap-2">
-            <NotificationModal
-              notifications={notifications}
-              notificationRefetch={() => {}}
+
+        </div>
+
+        <Tabs defaultValue="overview" className="space-y-4 mb-4">
+          <TabsList>
+            <TabsTrigger value="overview">Overview</TabsTrigger>
+            <TabsTrigger value="subscription">Subscription</TabsTrigger>
+            <TabsTrigger value="notification">Notification</TabsTrigger>
+          </TabsList>
+          <TabsContent value="overview">
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 mb-8">
+            <MetricsCard
+              title="Revenue"
+              value="₦984.28"
+              change="+11.82"
+              changeType="increase"
             />
-            <Separator
-              orientation="vertical"
-              className="border-[#C2C2C2] border-2"
+            <MetricsCard
+              title="Subscription"
+              value="169"
+              change="-18.28"
+              changeType="decrease"
             />
-            <div className="flex gap-2">
-              <Link href="/dashboard/admin/account/profile">
-                <Avatar>
-                  <AvatarImage
-                    src="https://github.com/shadcn.png"
-                    alt="avatar"
-                  />
-                  <AvatarFallback>CN</AvatarFallback>
-                </Avatar>
-              </Link>
-              <div className="flex items-center gap-1">
-                <div>
-                  <h2 className="text-[#0A0A0A] font-semibold text-base">
-                    Millie Brown
-                  </h2>
-                  <p className="text-[#0A0A0A] font-normal text-xs">
-                    Super admin
-                  </p>
-                </div>
-                <ChevronDown size="20" />
-              </div>
-            </div>
+            <MetricsCard
+              title="Agent"
+              value="406"
+              change="+33.3"
+              changeType="increase"
+            />
+            <MetricsCard
+              title="Disbursement"
+              value="102"
+              change="-18.27"
+              changeType="decrease"
+            />
           </div>
-        </div>
-
-        <div className="grid grid-cols-4 gap-6 mb-8">
-          <MetricsCard
-            title="Revenue"
-            value="₦984.28"
-            change="+11.82"
-            changeType="increase"
-          />
-          <MetricsCard
-            title="Subscription"
-            value="169"
-            change="-18.28"
-            changeType="decrease"
-          />
-          <MetricsCard
-            title="Agent"
-            value="406"
-            change="+33.3"
-            changeType="increase"
-          />
-          <MetricsCard
-            title="Disbursement"
-            value="102"
-            change="-18.27"
-            changeType="decrease"
-          />
-        </div>
-
-        <div className="flex gap-6">
-          <div className="w-1/2">
+          <div className="w-full">
+            <OutcomeStatistics />
+          </div>
+          </TabsContent>
+          <TabsContent value="subscription">
             <NewSubscription />
+          </TabsContent>
+          <TabsContent value="notification">
+            <NotificationModal notifications={undefined} notificationRefetch={undefined} />
             <div className=" bg-white p-4 rounded-lg shadow-md">
               <h2 className="text-xl font-semibold mb-4">Chats</h2>
               {[
@@ -132,14 +115,10 @@ const Overview: NextPageWithLayout = () => {
                 <ChatCard key={idx} {...chat} />
               ))}
             </div>
-
-          </div>
-          <div className="w-1/2">
-          <OutcomeStatistics />
-          </div>
-        </div>
+          </TabsContent>
+        </Tabs>
       </div>
-    </DashboardSidebar>
+    </>
   );
 };
 

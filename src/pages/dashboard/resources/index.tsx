@@ -19,7 +19,8 @@ import Feed from "@/components/Cards/Feed";
 
 const Resources: NextPageWithLayout = () => {
   return (
-    <DashboardSidebar>
+    <>
+    <DashboardSidebar />
       <div className="w-full p-6">
         <div className="flex justify-between items-center mb-8">
           <div>
@@ -117,7 +118,7 @@ const Resources: NextPageWithLayout = () => {
         <Machinery />
         <Feed />
       </div>
-    </DashboardSidebar>
+    </>
   );
 };
 

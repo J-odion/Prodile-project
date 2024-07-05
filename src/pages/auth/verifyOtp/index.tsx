@@ -47,6 +47,38 @@ const ConfirmEmail = () => {
 
   return (
     <div className="flex h-screen">
+      <div className="w-1/3 relative">
+        <Image
+          src="/images/authBg.png"
+          layout="fill"
+          objectFit="cover"
+          alt="Background Image"
+        />
+        <div className="absolute left-6 top-6">
+          <Image
+            src="/images/prodile-logo-white.svg"
+            alt="prodile logo"
+            height={20}
+            width={150}
+          />
+        </div>
+        <div className="absolute inset-0 flex flex-col justify-center items-center text-white p-8 my-14 space-y-40">
+          <div className="flex flex-col items-center justify-center gap-4">
+            <h1 className="text-4xl font-bold mt-8 text-[--prodile-yellow] capitalize">
+              Agriculture matter
+            </h1>
+            <h3 className="text-2xl font-semibold text-[44px] mt-4">
+              Good production
+            </h3>
+          </div>
+        </div>
+        <div className="absolute bottom-4 right-0 left-0">
+          <p className="text-center mt-4 text-[#BDBDBD] font-normal text-md">
+            Dissuade ecstatic and properly saw entirely sir why laughter
+            endeavor. In on my jointure horrible margaret suitable he speedily.
+          </p>
+        </div>
+      </div>
       <div className=" w-2/3 flex flex-col justify-center px-[16rem]">
         <h1 className="text-4xl font-semibold mb-2 text-[#0C1421]">
           OTP Verification
@@ -57,7 +89,7 @@ const ConfirmEmail = () => {
         </p>
 
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 flex justify-center flex-col">
             <FormField
               control={form.control}
               name="otp_code"
@@ -101,12 +133,12 @@ const ConfirmEmail = () => {
             <div className="flex flex-col gap-4">
               <CustomButton
                 type="submit"
-                className="w-full bg-[--prodile-yellow] h-[3em] text-white py-4 rounded-lg mt-10 font-normal text-xl"
+                className="w-full bg-[--prodile-yellow] h-10 text-white py-4 rounded-lg mt-10 font-normal text-lg"
               >
                 Continue
               </CustomButton>
               <Button
-                className="w-full bg-[--prodile-blue] font-normal text-xl py-4 h-[3em]"
+                className="w-full bg-[--prodile-blue] font-normal text-lg py-4 h-10"
                 onClick={handleBacktoLogin}
               >
                 Back to login
@@ -124,35 +156,7 @@ const ConfirmEmail = () => {
         </div>
       </div>
 
-      <div className="w-1/3 relative">
-        <Image
-          src="/images/authBg.png"
-          layout="fill"
-          objectFit="cover"
-          alt="Background Image"
-        />
-        <div className="absolute inset-0 flex flex-col items-center text-white p-8 my-14 space-y-40">
-          <Image
-            src="/images/prodile-logo-white.svg"
-            alt="prodile logo"
-            height={60}
-            width={260}
-          />
-          <div className="flex flex-col items-center gap-4">
-            <h1 className="text-5xl font-bold mt-8 text-[--prodile-yellow] capitalize">
-              Agriculture matter
-            </h1>
-            <h3 className="text-2xl font-semibold text-[44px] mt-4">
-              Good production
-            </h3>
-            <p className="text-center mt-4 text-[#BDBDBD] font-normal text-lg">
-              Dissuade ecstatic and properly saw entirely sir why laughter
-              endeavor. In on my jointure horrible margaret suitable he
-              speedily.
-            </p>
-          </div>
-        </div>
-      </div>
+
     </div>
   );
 };

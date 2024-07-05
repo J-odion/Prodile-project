@@ -33,7 +33,8 @@ const Agents: NextPageWithLayout = () => {
   const currentItems = agents.slice(indexOfFirstItem, indexOfLastItem);
 
   return (
-    <DashboardSidebar>
+    <>
+    <DashboardSidebar />
       <div className="w-full p-6">
         <div className="flex justify-between items-center mb-8">
           <div>
@@ -161,7 +162,7 @@ const Agents: NextPageWithLayout = () => {
         currentPage={currentPage}
         onPageChange={setCurrentPage}
       />
-    </DashboardSidebar>
+    </>
   );
 };
 

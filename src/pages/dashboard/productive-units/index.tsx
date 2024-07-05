@@ -78,7 +78,8 @@ const ProductiveUnits: NextPageWithLayout = () => {
   }
 
   return (
-    <DashboardSidebar>
+    <>
+    <DashboardSidebar />
       <div className="w-full p-6">
         <div className="flex justify-between items-center mb-8">
           <div>
@@ -275,7 +276,7 @@ const ProductiveUnits: NextPageWithLayout = () => {
       />
       <AddIndividualModal open={showModal} setOpen={setShowModal} title="Add productive units" />
       <AddCoporateModal open={showCoporateModal} setOpen={setShowCoporateModal} title="Add Productive Units" />
-    </DashboardSidebar>
+    </>
   );
 };
 
