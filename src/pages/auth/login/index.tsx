@@ -39,7 +39,7 @@ const Login = () => {
             <div className=" w-2/3 flex flex-col justify-center px-[16rem]">
                 <h1 className="text-4xl font-semibold mb-2 text-[#0C1421]">Welcome back 👋</h1>
                 <p className="text-[--prodile-text-darkBlue] font-normal text-xl mb-6">
-                    Today is a new day. It's your day. You shape it.
+                    Today is a new day. It&apos;s your day. You shape it.
                     Sign in to start managing your projects.
                 </p>
 
@@ -83,7 +83,7 @@ const Login = () => {
                 </div>
                 <div className="mt-4 text-center">
                     <p className="text-lg font-normal">
-                        <span className='text-[--prodile-text-darkBlue]'>Don't you have an account? </span><Link href="/auth/signup" className="text-blue-500 hover:underline">Sign up</Link>
+                        <span className='text-[--prodile-text-darkBlue]'>Don&apos;t you have an account? </span><Link href="/auth/signup" className="text-blue-500 hover:underline">Sign up</Link>
                     </p>
                 </div>
             </div>
