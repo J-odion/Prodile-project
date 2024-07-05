@@ -40,8 +40,8 @@ const ForgotPassword = () => {
     }
 
     return (
-        <div className="flex h-screen">
-            <div className=" w-2/3 flex flex-col justify-center px-[16rem]">
+        <div className="flex h-screen w-full">
+            <div className=" w-full md:w-1/2 flex flex-col justify-center px-8 md:px-14 lg:px-24">
                 <h1 className="text-4xl font-semibold mb-2 text-[#0C1421]">Reset Pasword</h1>
                 <p className="text-[--prodile-text-darkBlue] font-normal text-xl mt-4 mb-6 ">
                 Type in your registered email address to reset password
@@ -81,7 +81,7 @@ const ForgotPassword = () => {
                 </div>
             </div>
 
-            <div className="w-1/3 relative">
+            <div className="w-1/2 hidden md:flex relative">
                 <Image src="/images/authBg.png" layout="fill" objectFit="cover" alt="Background Image" />
                 <div className="absolute inset-0 flex flex-col items-center text-white p-8 my-14 space-y-40">
                     <Image src="/images/prodile-logo-white.svg" alt="prodile logo" height={60} width={260} />
