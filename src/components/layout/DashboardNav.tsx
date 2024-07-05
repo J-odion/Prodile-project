@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useRouter } from 'next/router'
 import { Input } from '@/components/ui/input'
-import { Search, X, AlignJustify, PieChart, BookOpen, BookText, ShoppingBag, Users, MessageCircle, UserCircle, LogOut } from 'lucide-react'
+import { Search, X, AlignJustify, PieChart, BookOpen, BookText, ShoppingBag, Users, MessageCircle, UserCircle, LogOut, Scroll, Proportions, Settings } from 'lucide-react'
 import NotificationModal from './NotificationModal'
 import { Skeleton } from '@/components/ui/skeleton'
 import Link from 'next/link'
@@ -87,13 +87,14 @@ const DashboardNav = ({page, toggleSideBar, setToggleSideBar}: Props) => {
             <div className="flex items-center gap-3 justify-center h-20">
             {/* <Image src='/images/prodile-logo-yellow.svg' width={100} height={100} alt='logo' /> */}
             </div>
+            <h2 className="text-center text-[#222222] font-semibold text-[13px] uppercase">Menu</h2>
             <ul className="w-60 pt-10 text-[#959190]">
               <Link href="/dashboard">
                 <li
                   className={
                     route === "/dashboard"
-                      ? "bg-[#1C1C1C0D] py-3 pl-10 text-white"
-                      : "my-1 py-3 pl-10 hover:bg-[#1C1C1C0D] hover:text-[#1C1C1C] rounded-xl"
+                      ? "bg-[--prodile-yellow] py-3 pl-10 text-white rounded-xl font-semibold text-sm"
+                      : "my-1 py-3 pl-10 hover:bg-[--prodile-yellow] hover:text-[#1C1C1C] font-semibold text-sm rounded-xl"
                   }
                   onClick={() => setToggleSideBar(false)}
                 >
@@ -101,77 +102,74 @@ const DashboardNav = ({page, toggleSideBar, setToggleSideBar}: Props) => {
                       <span className="mr-3">
                         <PieChart size="20" />
                       </span>
-                      Dashboard
+                      Overview
                     </div>
                   </li>
               </Link>
 
-              <Link href="/dashboard/dashboard/courses">
+              <Link href="/dashboard/productive-units">
                 <li
                   className={
-                    route === "/dashboard/student/courses"
-                      ? "bg-[#1C1C1C0D] py-3 pl-10 text-white"
-                      : "my-1 py-3 pl-10 hover:bg-[#1C1C1C0D] hover:text-[#1C1C1C] rounded-xl"
+                    route === "/dashboard/productive-units"
+                    ? "bg-[--prodile-yellow] py-3 pl-10 text-white rounded-xl font-semibold text-sm"
+                    : "my-1 py-3 pl-10 hover:bg-[--prodile-yellow] hover:text-[#1C1C1C] font-semibold text-sm rounded-xl"
                   }
-                  onClick={() => setToggleSideBar(false)}
                 >
                   <div className="flex items-center">
                     <span className="mr-3">
-                      <BookOpen size="20" />
+                      <Scroll size="20" />
                     </span>
-                    Product units
+                    Productive units
                   </div>
                 </li>
               </Link>
 
-              <Link href="/dashboard/student/shoppers">
+              <Link href="/dashboard/agents">
                 <li
                   className={
-                    route === "/dashboard/student/shoppers"
-                      ? "bg-[#1C1C1C0D] py-3 pl-10 text-white"
-                      : "my-1 py-3 pl-10 hover:bg-[#1C1C1C0D] hover:text-[#1C1C1C] rounded-xl"
+                    route === "/dashboard/agents"
+                    ? "bg-[--prodile-yellow] py-3 pl-10 text-white rounded-xl font-semibold text-sm"
+                    : "my-1 py-3 pl-10 hover:bg-[--prodile-yellow] hover:text-[#1C1C1C] font-semibold text-sm rounded-xl"
                   }
-                  onClick={() => setToggleSideBar(false)}
                 >
                   <div className="flex items-center">
                     <span className="mr-3">
-                      <BookText size="20" />
+                      <Users size="20" />
                     </span>
                     Agents
                   </div>
                 </li>
               </Link>
 
-              <Link href="/dashboard/student/curriculum">
+              <Link href="/dashboard/resources">
                 <li
                   className={
-                    route === "/dashboard/student/curriculum"
-                      ? "bg-[#1C1C1C0D] py-3 pl-10 text-white"
-                      : "my-1 py-3 pl-10 hover:bg-[#1C1C1C0D] hover:text-[#1C1C1C] rounded-xl"
+                    route === "/dashboard/resources"
+                    ? "bg-[--prodile-yellow] py-3 pl-10 text-white rounded-xl font-semibold text-sm"
+                    : "my-1 py-3 pl-10 hover:bg-[--prodile-yellow] hover:text-[#1C1C1C] font-semibold text-sm rounded-xl"
                   }
-                  onClick={() => setToggleSideBar(false)}
                 >
                   <div className="flex items-center">
                     <span className="mr-3">
-                      <BookText size="20" />
+                      <Proportions size="20" />
                     </span>
                     Resources
                   </div>
                 </li>
               </Link>
 
-              <Link href="/dashboard/student/chat-forum">
+              <h2 className="text-center text-[#222222] font-semibold text-[13px] uppercase my-3">General</h2>
+              <Link href="/dashboard/settings">
                 <li
                   className={
-                    route === "/dashboard/student/chat-forum"
-                      ? "bg-[#1C1C1C0D] py-3 pl-10 text-white"
-                      : "my-1 py-3 pl-10 hover:bg-[#1C1C1C0D] hover:text-[#1C1C1C] rounded-xl"
+                    route === "/dashboard/settings"
+                    ? "bg-[--prodile-yellow] py-3 pl-10 text-white rounded-xl font-semibold text-sm"
+                    : "my-1 py-3 pl-10 hover:bg-[--prodile-yellow] hover:text-[#1C1C1C] font-semibold text-sm rounded-xl"
                   }
-                  onClick={() => setToggleSideBar(false)}
                 >
                   <div className="flex items-center">
                     <span className="mr-3">
-                      <ShoppingBag size="20" />
+                      <Settings size="20" />
                     </span>
                     Settings
                   </div>
