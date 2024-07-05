@@ -11,12 +11,8 @@ import NotificationModal from "@/components/layout/NotificationModal";
 import { Separator } from "@/components/ui/separator";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@/components/ui/tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Card } from "@/components/ui/card";
 
 export const notifications = {
   count: 2,
@@ -39,7 +35,7 @@ export const notifications = {
 const Overview: NextPageWithLayout = () => {
   return (
     <>
-    <DashboardSidebar />
+      <DashboardSidebar />
       <div className="w-full px-6 pt-28">
         <div className="flex justify-between items-center mb-8">
           <div>
@@ -48,52 +44,54 @@ const Overview: NextPageWithLayout = () => {
               Get summary of your weekly online transactions here.
             </p>
           </div>
-
         </div>
 
         <Tabs defaultValue="overview" className="space-y-4 mb-4">
           <TabsList>
             <TabsTrigger value="overview">Overview</TabsTrigger>
-            <TabsTrigger value="subscription">Subscription</TabsTrigger>
             <TabsTrigger value="notification">Notification</TabsTrigger>
           </TabsList>
           <TabsContent value="overview">
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 mb-8">
-            <MetricsCard
-              title="Revenue"
-              value="₦984.28"
-              change="+11.82"
-              changeType="increase"
-            />
-            <MetricsCard
-              title="Subscription"
-              value="169"
-              change="-18.28"
-              changeType="decrease"
-            />
-            <MetricsCard
-              title="Agent"
-              value="406"
-              change="+33.3"
-              changeType="increase"
-            />
-            <MetricsCard
-              title="Disbursement"
-              value="102"
-              change="-18.27"
-              changeType="decrease"
-            />
-          </div>
-          <div className="w-full">
-            <OutcomeStatistics />
-          </div>
+              <MetricsCard
+                title="Revenue"
+                value="₦984.28"
+                change="+11.82"
+                changeType="increase"
+              />
+              <MetricsCard
+                title="Subscription"
+                value="169"
+                change="-18.28"
+                changeType="decrease"
+              />
+              <MetricsCard
+                title="Agent"
+                value="406"
+                change="+33.3"
+                changeType="increase"
+              />
+              <MetricsCard
+                title="Disbursement"
+                value="102"
+                change="-18.27"
+                changeType="decrease"
+              />
+            </div>
+            <div className="w-full">
+              <OutcomeStatistics />
+            </div>
           </TabsContent>
-          <TabsContent value="subscription">
-            <NewSubscription />
-          </TabsContent>
-          <TabsContent value="notification">
-            <NotificationModal notifications={undefined} notificationRefetch={undefined} />
-            <div className=" bg-white p-4 rounded-lg shadow-md">
+
+          <TabsContent value="notification" className="flex gap-4 justify-between">
+            {/* <NotificationModal
+              notifications={undefined}
+              notificationRefetch={undefined}
+            /> */}
+            <div className="w-1/2">
+             <NewSubscription />
+             </div>
+            <Card className=" bg-white p-4 rounded-lg shadow-md w-1/2">
               <h2 className="text-xl font-semibold mb-4">Chats</h2>
               {[
                 {
@@ -114,7 +112,7 @@ const Overview: NextPageWithLayout = () => {
               ].map((chat, idx) => (
                 <ChatCard key={idx} {...chat} />
               ))}
-            </div>
+            </Card>
           </TabsContent>
         </Tabs>
       </div>
