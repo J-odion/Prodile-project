@@ -2,10 +2,11 @@ import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { Card } from "@/components/ui/card";
 
 const HeaderCard = () => {
   return (
-    <div className="flex justify-between items-center shadow-sm shadow-[#222222CC]/50 rounded-2xl p-4">
+    <Card className="flex justify-between items-center rounded-2xl p-4">
       <div className="flex gap-6 items-center">
         <Link href="/dashboard/admin/account/profile">
           <Avatar className="h-20 w-20">
@@ -19,7 +20,7 @@ const HeaderCard = () => {
         </div>
       </div>
       <Button className="bg-[--prodile-yellow] px-4 w-28">Edit</Button>
-    </div>
+    </Card>
   );
 };
 
