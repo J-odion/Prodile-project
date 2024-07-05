@@ -122,7 +122,7 @@ const Signup = () => {
             </form>
           </Form>
           <div className="text-center flex justify-center mt-4">
-            <ul className="text-xs flex gap-6 items-center">
+            <ul className="text-xs mt-4 justify-center flex gap-6 items-center">
               <li>Terms and conditions</li>
               <li className="bg-black h-[5px] w-[5px] rounded-full"></li>
               <li>Privacy policy</li>

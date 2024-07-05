@@ -40,8 +40,8 @@ const ConfirmEmail = () => {
   };
 
   return (
-    <div className="flex h-screen">
-      <div className=" w-2/3 flex flex-col justify-center px-[16rem]">
+    <div className="flex h-screen w-full">
+      <div className=" w-full md:w-1/2 flex flex-col justify-center px-8 md:px-14 lg:px-24">
         <h1 className="text-4xl font-semibold mb-2 text-[#0C1421]">
           Become an agent
         </h1>
@@ -66,24 +66,19 @@ const ConfirmEmail = () => {
               )}
             />
 
-            <div className="flex flex-col gap-4">
+            <div className="flex justify-center items-center flex-col gap-4">
               <CustomButton
                 type="submit"
                 className="w-full bg-[--prodile-yellow] h-[3em] text-white py-4 rounded-lg mt-10 font-normal text-xl"
               >
                 Send code
               </CustomButton>
-              <Button
-                className="w-full bg-[--prodile-blue] font-normal text-xl py-4 h-[3em]"
-                onClick={handleBacktoLogin}
-              >
-                Back to login
-              </Button>
+              <Link href="/auth/login">Back to login</Link>
             </div>
           </form>
         </Form>
 
-        <div className="text-center flex justify-center mt-14">
+        <div className="text-xs mt-4 justify-center flex gap-6 items-center">
           <ul className="flex gap-6 items-center">
             <li>Terms and conditions</li>
             <li className="bg-black h-[5px] w-[5px] rounded-full"></li>
@@ -92,7 +87,7 @@ const ConfirmEmail = () => {
         </div>
       </div>
 
-      <div className="w-1/3 relative">
+      <div className="w-1/2 hidden md:flex relative">
         <Image
           src="/images/authBg.png"
           layout="fill"
