@@ -78,56 +78,9 @@ const DashboardSidebar = ({ children }: DashboardSidebarProps) => {
   return (
     <>
       <nav className=" fixed w-full z-50">
-        <div className="hidden h-30 w-full bg-white lg:flex border-b items-center px-6 justify-between">
+        <div className="hidden h-30 w-full bg-white lg:flex border-b items-center px-14 justify-between">
           <div className="flex items-center">
-            <Popover open={open} onOpenChange={setOpen}>
-              <PopoverTrigger asChild>
-                <Button
-                  variant="outline"
-                  role="combobox"
-                  aria-expanded={open}
-                  className="w-[200px] justify-between"
-                >
-                  {value
-                    ? frameworks.find((framework) => framework.value === value)
-                        ?.label
-                    : "Select role..."}
-                  <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-[200px] p-0">
-                <Command>
-                  <CommandInput placeholder="Search framework..." />
-                  <CommandList>
-                    <CommandEmpty>No framework found.</CommandEmpty>
-                    <CommandGroup>
-                      {frameworks.map((framework) => (
-                        <CommandItem
-                          key={framework.value}
-                          value={framework.value}
-                          onSelect={(currentValue) => {
-                            setValue(
-                              currentValue === value ? "" : currentValue
-                            );
-                            setOpen(false);
-                          }}
-                        >
-                          <Check
-                            className={cn(
-                              "mr-2 h-4 w-4",
-                              value === framework.value
-                                ? "opacity-100"
-                                : "opacity-0"
-                            )}
-                          />
-                          {framework.label}
-                        </CommandItem>
-                      ))}
-                    </CommandGroup>
-                  </CommandList>
-                </Command>
-              </PopoverContent>
-            </Popover>
+            <Image src="/images/prodile-logo-yellow.svg" width={150} height={50} alt="prodile logo" />
             <div>
               <ul className="flex py-4 px-4 gap-4">
                 <Link href="/dashboard">
@@ -138,43 +91,19 @@ const DashboardSidebar = ({ children }: DashboardSidebarProps) => {
                         : " py-3 pl-10 hover:underline hover:text-[#1C1C1C] font-semibold text-sm rounded-xl"
                     }
                   >
-                    <div className="flex items-center">Overview</div>
+                    <div className="flex items-center">Dashboard</div>
                   </li>
                 </Link>
 
-                <Link href="/dashboard/productive-units">
+                <Link href="/dashboard/mail">
                   <li
                     className={
-                      route === "/dashboard/productive-units"
+                      route === "/dashboard/mail"
                         ? "text-[--prodile-yellow] py-3 rounded-xl font-semibold text-sm"
                         : " py-3 hover:underline hover:text-[#1C1C1C] font-semibold text-sm rounded-xl"
                     }
                   >
-                    <div className="flex items-center">Productive units</div>
-                  </li>
-                </Link>
-
-                <Link href="/dashboard/agents">
-                  <li
-                    className={
-                      route === "/dashboard/agents"
-                        ? "text-[--prodile-yellow] py-3 rounded-xl font-semibold text-sm"
-                        : " py-3 hover:underline hover:text-[#1C1C1C] font-semibold text-sm rounded-xl"
-                    }
-                  >
-                    <div className="flex items-center">Agents</div>
-                  </li>
-                </Link>
-
-                <Link href="/dashboard/resources">
-                  <li
-                    className={
-                      route === "/dashboard/resources"
-                        ? "text-[--prodile-yellow] py-3 rounded-xl font-semibold text-sm"
-                        : " py-3 hover:underline hover:text-[#1C1C1C] font-semibold text-sm rounded-xl"
-                    }
-                  >
-                    <div className="flex items-center">Resources</div>
+                    <div className="flex items-center">Mail</div>
                   </li>
                 </Link>
 
