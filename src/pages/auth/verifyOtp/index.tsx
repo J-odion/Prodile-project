@@ -7,7 +7,6 @@ import { useRouter } from "next/router";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { emailVerificationSchema } from "@/lib/formSchema";
 import { useToast } from "@/components/ui/use-toast";
-import FormRender from "@/components/FormRender";
 import CustomButton from "@/components/CustomButton";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -17,8 +16,6 @@ import {
   InputOTPSeparator,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
-
-// import GoogleSignInButton from '@/components/GoogleSignInButton';
 
 const ConfirmEmail = () => {
   const { toast } = useToast();
@@ -46,8 +43,8 @@ const ConfirmEmail = () => {
   };
 
   return (
-    <div className="flex h-screen">
-      <div className="w-1/3 relative">
+    <div className="flex flex-col md:flex-row min-h-screen w-full relative">
+      <div className="w-full md:w-1/2 lg:w-1/3 hidden md:flex relative">
         <Image
           src="/images/authBg.png"
           layout="fill"
@@ -62,46 +59,46 @@ const ConfirmEmail = () => {
             width={150}
           />
         </div>
-        <div className="absolute inset-0 flex flex-col justify-center items-center text-white p-8 my-14 space-y-40">
+        <div className="absolute inset-0 flex flex-col justify-center items-center text-white p-8 my-14 space-y-8">
           <div className="flex flex-col items-center justify-center gap-4">
-            <h1 className="text-4xl font-bold mt-8 text-[--prodile-yellow] capitalize">
+            <h1 className="text-4xl lg:text-5xl font-bold mt-8 text-[--prodile-yellow] capitalize">
               Agriculture matter
             </h1>
-            <h3 className="text-2xl font-semibold text-[44px] mt-4">
+            <h3 className="text-xl lg:text-2xl font-semibold mt-4">
               Good production
             </h3>
           </div>
         </div>
         <div className="absolute bottom-4 right-0 left-0">
-          <p className="text-center mt-4 text-[#BDBDBD] font-normal text-md">
-            Dissuade ecstatic and properly saw entirely sir why laughter
-            endeavor. In on my jointure horrible margaret suitable he speedily.
+          <p className="text-center mt-4 text-[#BDBDBD] font-normal text-sm lg:text-lg">
+            Dissuade ecstatic and properly saw entirely sir why laughter endeavor. In on my jointure horrible margaret suitable he speedily.
           </p>
         </div>
       </div>
-      <div className=" w-2/3 flex flex-col justify-center px-[16rem]">
-        <h1 className="text-4xl font-semibold mb-2 text-[#0C1421]">
+      <div className="w-full md:w-2/3 lg:w-2/3 flex flex-col justify-center items-center px-8 md:px-14 lg:px-24 py-14 md:py-0">
+        <h1 className="text-3xl lg:text-4xl font-semibold mb-2 text-[#0C1421]">
           OTP Verification
         </h1>
-        <p className="text-[--prodile-text-darkBlue] font-normal text-xl mt-4 mb-6 ">
+        <p className="text-[--prodile-text-darkBlue] font-normal text-lg lg:text-xl mb-6">
           A code has been sent to{" "}
           <span className="text-[--prodile-yellow]">********70</span>
         </p>
 
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 flex justify-center flex-col">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 w-full flex justify-center flex-col">
             <FormField
               control={form.control}
               name="otp_code"
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <InputOTP maxLength={6} {...field}>
-                      <InputOTPGroup className="space-x-4">
+                    <div className="flex justify-center">
+                    <InputOTP maxLength={6} {...field} className="flex justify-center">
+                      <InputOTPGroup className="space-x-4 flex justify-center">
                         <InputOTPSlot
                           index={0}
                           {...form.register("otp_code")}
-                          className="bg-[#1E1E1E0D] "
+                          className="bg-[#1E1E1E0D]"
                         />
                         <InputOTPSlot
                           index={1}
@@ -126,6 +123,7 @@ const ConfirmEmail = () => {
                         />
                       </InputOTPGroup>
                     </InputOTP>
+                    </div>
                   </FormControl>
                 </FormItem>
               )}
@@ -155,8 +153,6 @@ const ConfirmEmail = () => {
           </ul>
         </div>
       </div>
-
-
     </div>
   );
 };
