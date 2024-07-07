@@ -36,7 +36,7 @@ const Overview: NextPageWithLayout = () => {
   return (
     <>
       <DashboardSidebar />
-      <div className="w-full px-6 pt-28">
+      <div className="w-full px-6 pt-10 lg:pt-28">
         <div className="flex justify-between items-center mb-8">
           <div>
             <h1 className="text-4xl font-semibold text-[#404040]">Dashboard</h1>
