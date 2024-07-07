@@ -83,15 +83,15 @@ const Overview: NextPageWithLayout = () => {
             </div>
           </TabsContent>
 
-          <TabsContent value="notification" className="flex gap-4 justify-between">
+          <TabsContent value="notification" className="flex gap-4 justify-between flex-col md:flex-row">
             {/* <NotificationModal
               notifications={undefined}
               notificationRefetch={undefined}
             /> */}
-            <div className="w-1/2">
+            <div className="md:w-1/2 w-full">
              <NewSubscription />
              </div>
-            <Card className=" bg-white p-4 rounded-lg shadow-md w-1/2">
+            <Card className=" bg-white p-4 rounded-lg shadow-md md:w-1/2 w-full">
               <h2 className="text-xl font-semibold mb-4">Chats</h2>
               {[
                 {
