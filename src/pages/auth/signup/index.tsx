@@ -40,8 +40,8 @@ const Signup = () => {
     router.push("/auth/login");
   };
   return (
-    <div className="flex h-screen w-full">
-      <div className="w-1/2 hidden md:flex relative">
+    <div className="flex flex-col md:flex-row min-h-screen w-full relative">
+      <div className="w-full md:w-1/2 hidden md:flex relative">
         <Image
           src="/images/authBg.png"
           layout="fill"
@@ -58,32 +58,32 @@ const Signup = () => {
         </div>
         <div className="absolute inset-0 flex flex-col justify-center items-center text-white p-8 my-14 space-y-40">
           <div className="flex flex-col items-center justify-center gap-4">
-            <h1 className="text-5xl font-bold mt-8 text-[--prodile-yellow] capitalize">
+            <h1 className="text-3xl lg:text-4xl font-bold mt-8 text-[--prodile-yellow] capitalize">
               Agriculture matter
             </h1>
-            <h3 className="text-2xl font-semibold text-[44px] mt-4">
+            <h3 className="text-xl lg:text-2xl font-semibold mt-4">
               Good production
             </h3>
           </div>
         </div>
         <div className="absolute bottom-4 right-0 left-0">
-          <p className="text-center mt-4 text-[#BDBDBD] font-normal text-lg">
+          <p className="text-center mt-4 text-[#BDBDBD] font-normal text-sm lg:text-lg">
             Dissuade ecstatic and properly saw entirely sir why laughter
             endeavor. In on my jointure horrible margaret suitable he speedily.
           </p>
         </div>
       </div>
-      <div className="w-full md:w-1/2 flex flex-col justify-center px-8 md:px-14 lg:px-24">
+      <div className="w-full md:w-1/2 flex flex-col justify-center items-center px-8 md:px-14 lg:px-24 py-14 md:py-0">
         <div className="my-2">
-          <h1 className="text-4xl font-semibold text-[#0C1421]">
+          <h1 className="text-2xl lg:text-3xl font-semibold mb-2 text-[#0C1421]">
             Become an agent!
           </h1>
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}
-              className="space-y-4 mt-8"
+              className="space-y-4 md:mt-8 mt-4 w-full"
             >
-              <div className="flex justify-between gap-6">
+              <div className="flex flex-col md:flex-row justify-between gap-6">
                 <FormField
                   control={form.control}
                   name="firstName"
