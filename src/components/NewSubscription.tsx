@@ -12,7 +12,7 @@ const NewSubscription = () => {
             <Plus size={20} className='text-[--prodile-yellow]'/>
           </button>
         </div>
-        <div className="flex space-x-4">
+        <div className="flex flex-wrap gap-4">
           {["John", "Henry", "Mary", "Anita", "Mary"].map((name, idx) => (
             <div key={idx} className="text-center">
               <Avatar className='mb-2'>
@@ -30,6 +30,5 @@ const NewSubscription = () => {
       </Card>
     );
   };
-
 
 export default NewSubscription

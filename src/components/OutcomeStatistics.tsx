@@ -6,16 +6,14 @@ import OutcomeStatisticsCard from "./Cards/OutcomeStatisticsCard";
 
 const OutcomeStatistics = () => {
   return (
-    <div className="grid gap-4 md:grid-cols-2 p-4 mb-8 w-full">
+    <div className="grid gap-4 md:grid-cols-2 p-4 mb-8 w-full justify-center">
       <Card className="px-6">
         <CardHeader>
           <CardTitle>Outcome Statistics</CardTitle>
         </CardHeader>
-        {/* <h2 className="text-xl font-semibold mb-1">Outcome Statistics</h2> */}
         <CardContent className="pl-2">
           <OutcomeStatisticsCard />
         </CardContent>
-
       </Card>
       <div>
         <Image
@@ -23,6 +21,7 @@ const OutcomeStatistics = () => {
           width={600}
           height={600}
           alt={"A map of agric"}
+          className="w-full h-auto"
         />
       </div>
     </div>
