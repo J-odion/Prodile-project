@@ -102,15 +102,15 @@ const DashboardNav = ({page, toggleSideBar, setToggleSideBar}: Props) => {
                       <span className="mr-3">
                         <PieChart size="20" />
                       </span>
-                      Overview
+                      Dashboard
                     </div>
                   </li>
               </Link>
 
-              <Link href="/dashboard/productive-units">
+              <Link href="/dashboard/mail">
                 <li
                   className={
-                    route === "/dashboard/productive-units"
+                    route === "/dashboard/mail"
                     ? "bg-[--prodile-yellow] py-3 pl-10 text-white rounded-xl font-semibold text-sm"
                     : "my-1 py-3 pl-10 hover:bg-[--prodile-yellow] hover:text-[#1C1C1C] font-semibold text-sm rounded-xl"
                   }
@@ -119,44 +119,11 @@ const DashboardNav = ({page, toggleSideBar, setToggleSideBar}: Props) => {
                     <span className="mr-3">
                       <Scroll size="20" />
                     </span>
-                    Productive units
+                    Mail
                   </div>
                 </li>
               </Link>
 
-              <Link href="/dashboard/agents">
-                <li
-                  className={
-                    route === "/dashboard/agents"
-                    ? "bg-[--prodile-yellow] py-3 pl-10 text-white rounded-xl font-semibold text-sm"
-                    : "my-1 py-3 pl-10 hover:bg-[--prodile-yellow] hover:text-[#1C1C1C] font-semibold text-sm rounded-xl"
-                  }
-                >
-                  <div className="flex items-center">
-                    <span className="mr-3">
-                      <Users size="20" />
-                    </span>
-                    Agents
-                  </div>
-                </li>
-              </Link>
-
-              <Link href="/dashboard/resources">
-                <li
-                  className={
-                    route === "/dashboard/resources"
-                    ? "bg-[--prodile-yellow] py-3 pl-10 text-white rounded-xl font-semibold text-sm"
-                    : "my-1 py-3 pl-10 hover:bg-[--prodile-yellow] hover:text-[#1C1C1C] font-semibold text-sm rounded-xl"
-                  }
-                >
-                  <div className="flex items-center">
-                    <span className="mr-3">
-                      <Proportions size="20" />
-                    </span>
-                    Resources
-                  </div>
-                </li>
-              </Link>
 
               <h2 className="text-center text-[#222222] font-semibold text-[13px] uppercase my-3">General</h2>
               <Link href="/dashboard/settings">
