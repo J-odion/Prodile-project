@@ -13,6 +13,9 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card } from "@/components/ui/card";
+import ProductiveUnits from "./productive-units";
+import Agents from "./agents";
+import Resources from "./resources";
 
 export const notifications = {
   count: 2,
@@ -49,7 +52,10 @@ const Overview: NextPageWithLayout = () => {
         <Tabs defaultValue="overview" className="space-y-4 mb-4">
           <TabsList>
             <TabsTrigger value="overview">Overview</TabsTrigger>
-            <TabsTrigger value="notification">Notification</TabsTrigger>
+            <TabsTrigger value="productive-units">Productive Units</TabsTrigger>
+            <TabsTrigger value="agents">Agents</TabsTrigger>
+            <TabsTrigger value="resources">Resources</TabsTrigger>
+            {/* <TabsTrigger value="notification">Notification</TabsTrigger> */}
           </TabsList>
           <TabsContent value="overview">
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 mb-8">
@@ -82,12 +88,17 @@ const Overview: NextPageWithLayout = () => {
               <OutcomeStatistics />
             </div>
           </TabsContent>
+          <TabsContent value="productive-units">
+            <ProductiveUnits />
+          </TabsContent>
+          <TabsContent value="agents">
+            <Agents />
+          </TabsContent>
+          <TabsContent value="resources">
+            <Resources />
+          </TabsContent>
 
-          <TabsContent value="notification" className="flex gap-4 justify-between flex-col md:flex-row">
-            {/* <NotificationModal
-              notifications={undefined}
-              notificationRefetch={undefined}
-            /> */}
+          {/* <TabsContent value="notification" className="flex gap-4 justify-between flex-col md:flex-row">
             <div className="md:w-1/2 w-full">
              <NewSubscription />
              </div>
@@ -113,7 +124,7 @@ const Overview: NextPageWithLayout = () => {
                 <ChatCard key={idx} {...chat} />
               ))}
             </Card>
-          </TabsContent>
+          </TabsContent> */}
         </Tabs>
       </div>
     </>

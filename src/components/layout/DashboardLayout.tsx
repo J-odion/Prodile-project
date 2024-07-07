@@ -9,6 +9,7 @@ type DashboardPages =
   |'agents'
   |'resources'
   |'settings'
+  | 'mail'
 
 
   type DashboardIcons  = {
