@@ -83,7 +83,7 @@ const defaultValues: Partial<ProfileFormValues> = {
   return (
     <>
       <DashboardSidebar />
-      <div className="pt-24 px-6 w-full">
+      <div className="w-full px-6 pt-10 lg:pt-28">
         <SettingsLayout>
         <h1 className="font-medium text-xl mb-2">Profile settings</h1>
         <p className="text-[#AEAEAE] font-medium text-base">These are your personal details</p>
