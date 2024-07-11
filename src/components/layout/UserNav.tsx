@@ -15,6 +15,7 @@ import {
     DropdownMenuTrigger,
   } from "@/components/ui/dropdown-menu"
 import Link from "next/link"
+import { LogOut, Settings } from "lucide-react"
 
   export function UserNav() {
     return (
@@ -30,7 +31,7 @@ import Link from "next/link"
         <DropdownMenuContent className="w-56" align="end" forceMount>
           <DropdownMenuLabel className="font-normal">
             <div className="flex flex-col space-y-1">
-              <p className="text-sm font-medium leading-none">Jane</p>
+              <p className="text-sm font-medium leading-none mb-1">Jane</p>
               <p className="text-xs leading-none text-muted-foreground">
                 janedoe@example.com
               </p>
@@ -39,24 +40,16 @@ import Link from "next/link"
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
             <DropdownMenuItem>
+              <Settings size={16} className="mr-2" />
               <Link href='/dashboard/settings'>
-                Profile
+                Manage Account
               </Link>
             </DropdownMenuItem>
-            <DropdownMenuItem>
-              Notification
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <Link href='/dashboard/settings'>
-                Settings
-              </Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem>New Team</DropdownMenuItem>
           </DropdownMenuGroup>
-          <DropdownMenuSeparator />
           <DropdownMenuItem>
+            <LogOut size={16} className="mr-2" />
             <Link href='/'>
-                Log out
+                Sign out
               </Link>
           </DropdownMenuItem>
         </DropdownMenuContent>

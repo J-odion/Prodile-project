@@ -38,7 +38,7 @@ const FormRender = ({
             {...field}
             {...inputProps}
             type={showPass ? "text" : inputProps.type}
-            className="bg-transparent border-[#0000003B] border-[1px] text-[#0000003B] rounded-lg h-10 px-4 w-full focus:outline-none focus:ring-2 focus:ring-[#0000003B] focus:border-transparent placeholder:text-[#646464]"
+            className="bg-yellow-200 border-transparent border-[1px] text-black rounded-lg h-10 px-4 w-full focus:outline-none focus:ring-2 focus:ring-[--prodile-yellow] focus:border-[--prodile-yellow] placeholder:text-[#646464]"
           />
 
 

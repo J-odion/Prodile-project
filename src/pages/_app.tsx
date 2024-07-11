@@ -1,4 +1,5 @@
 import { ReactElement, ReactNode } from "react";
+import { ThemeProvider } from "@/components/theme-provider";
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import HEAD from "next/head";
@@ -36,6 +37,12 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </HEAD>
       {/* <QueryClientProvider client={queryClient}> */}
+      <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
         <NextTopLoader
           color="#29D"
           initialPosition={0.3}
@@ -48,6 +55,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
         />
         <Toaster />
         {getLayout(<Component {...pageProps} />)}
+        </ThemeProvider>
       {/* </QueryClientProvider> */}
     </>
   )
