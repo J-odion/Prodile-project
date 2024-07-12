@@ -26,8 +26,7 @@ const Signup = () => {
   const form = useForm<z.infer<typeof signupFormSchema>>({
     resolver: zodResolver(signupFormSchema),
     defaultValues: {
-      firstName: "",
-      lastName: "",
+      name: "",
       email: "",
       password: "",
       confirmPassword: "",
@@ -46,7 +45,7 @@ const Signup = () => {
     router.push("/auth/login");
   };
   return (
-    <div className="relative flex items-center justify-center min-h-screen">
+    <div className="relative flex items-center justify-center min-h-screen bg-gradient-to-b from-green-400/5 to-yellow-400/15">
       <div className="absolute md:block hidden md:w-1/2 top-0 left-8 h-full lg:w-1/4">
         <Image
           src="/images/agricFarm.svg"
@@ -77,30 +76,17 @@ const Signup = () => {
               onSubmit={form.handleSubmit(onSubmit)}
               className="grid gap-4"
             >
-              <div className="grid grid-cols-2 gap-4">
                 <FormField
                   control={form.control}
-                  name="firstName"
+                  name="name"
                   render={({ field }) => (
                     <FormRender
-                      placeholder="First Name"
+                      placeholder="name"
                       field={field}
-                      label="First Name"
+                      label="Name"
                     />
                   )}
                 />
-                <FormField
-                  control={form.control}
-                  name="lastName"
-                  render={({ field }) => (
-                    <FormRender
-                      placeholder="Last Name"
-                      field={field}
-                      label="Last Name"
-                    />
-                  )}
-                />
-              </div>
               <FormField
                 control={form.control}
                 name="email"

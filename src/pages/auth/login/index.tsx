@@ -41,8 +41,8 @@ const Login = () => {
   };
 
   return (
-    <div className="relative flex items-center justify-center min-h-screen">
-      <div className="absolute md:block hidden md:w-1/2 top-0 left-8 h-full lg:w-1/4">
+    <div className="relative flex items-center justify-center min-h-screen bg-gradient-to-b from-green-400/5 to-yellow-400/15">
+      <div className="absolute md:block hidden md:w-1/2 top-0 left-8 h-full lg:w-1/2">
         <Image
           src="/images/agricFarm.svg"
           alt="Agricultural Illustration Left"
@@ -58,7 +58,7 @@ const Login = () => {
           objectFit="contain"
         />
       </div>
-      <Card className="mx-auto max-w-sm z-10 bg-transparent lg:bg-white">
+      <Card className="mx-auto max-w-sm z-10 bg-white py-6">
         <CardHeader>
           <CardTitle className="text-2xl">Login</CardTitle>
           <CardDescription>
