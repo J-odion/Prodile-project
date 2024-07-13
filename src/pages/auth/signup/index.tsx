@@ -41,14 +41,33 @@ const Signup = () => {
     },
   });
 
+  const mutation = useMutation({
+    mutationFn: AuthSignUp,
+    onSuccess: () => {
+      toast({
+        title: "Signup successful",
+        description: "Please confirm your email to continue",
+        variant: "default",
+      });
+      router.push("/auth/confirm-email");
+    },
+    onError: (error: any) => {
+      console.log(error);
+      toast({
+        title: "Signup failed",
+        description: "An error occurred while signing up",
+        variant: "destructive",
+      });
+    },
+  });
+
   const onSubmit = async (data: z.infer<typeof signupFormSchema>) => {
-    console.log(data);
-    toast({
-      title: "Signup successful",
-      description: "You have successfully signed up!",
-      variant: "default",
-    });
-    router.push("/auth/confirm-email");
+    const payload = {
+      name: data.name,
+      email: data.email,
+      password: data.password,
+    };
+    mutation.mutate(payload);
   };
 
   const containerVariants = {
@@ -101,7 +120,7 @@ const Signup = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 2 }}
-        className="absolute md:block hidden md:w-1/2 top-0 left-8 h-full lg:w-1/4"
+        className="absolute md:block hidden md:w-1/2 top-0 left-8 h-full lg:w-1/2"
       >
         <Image
           src="/images/agricFarm.svg"
@@ -207,6 +226,8 @@ const Signup = () => {
                 <CustomButton
                   type="submit"
                   className="w-full bg-[--prodile-yellow] h-10 rounded-xl text-lg font-normal text-white py-4"
+                  isLoading={form.formState.isSubmitting}
+                  disabled={form.formState.isSubmitting}
                 >
                   Signup
                 </CustomButton>
