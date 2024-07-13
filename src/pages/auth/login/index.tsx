@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { Form, FormField } from "@/components/ui/form";
@@ -10,7 +10,7 @@ import { useToast } from "@/components/ui/use-toast";
 import FormRender from "@/components/FormRender";
 import CustomButton from "@/components/CustomButton";
 import Link from "next/link";
-import { useMutation } from "@tanstack/react-query";
+import { Query, useMutation } from "@tanstack/react-query";
 import { AuthLogin } from "../../../../hooks/auth";
 import {
   Card,
@@ -20,11 +20,18 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { motion } from "framer-motion";
+import { useQueryClient } from "@tanstack/react-query";
+import { QUERY_KEYS } from "@/lib/utils";
+import { LoginProps } from "../../../../hooks/auth/types";
+import { useStorage } from "@/lib/useStorage";
+import { AuthContext } from "../../../../context/auth.context";
 
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
   const router = useRouter();
+  const queryClient = useQueryClient();
+  const { setAuthTokens } = useContext(AuthContext);
 
   const form = useForm<z.infer<typeof signInFormSchema>>({
     resolver: zodResolver(signInFormSchema),
@@ -34,33 +41,33 @@ const Login = () => {
     },
   });
 
-  const mutation = useMutation({
-    mutationFn: AuthLogin,
-    onSuccess: () => {
-      toast({
-        title: "Login successful",
-        variant: "default",
-      });
-      router.push("/dashboard");
-    },
-    onError: (error: any) => {
-      console.log(error);
-      setIsLoading(false);
+  const { mutate, isPending } = useMutation({
+    mutationKey: [QUERY_KEYS.login],
+    mutationFn: (data: LoginProps) => AuthLogin(data),
+    onSuccess(res) {
+      if (res.status === 200) {
+        console.log("Login response:", res.data);
+        toast({
+          title: `Logged in successfully`,
+          className: "toast-success",
+        });
+        queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.login] });
+        setAuthTokens(res.data.token);
+        console.log(res.data.token);
+        useStorage.setItem("token", res.data.token)
+        router.push("/dashboard");
+    } else {
       toast({
         title: "Login failed",
-        description: "An error occurred while logging in",
-        variant: "destructive",
+        description: "Invalid email or password",
+        className: "toast-error",
       });
-    },
-  });
+    }
+  }
+});
 
-  const onSubmit = async (data: z.infer<typeof signInFormSchema>) => {
-    const payload = {
-      email: data.email,
-      password: data.password,
-    };
-    setIsLoading(true);
-    mutation.mutate(payload);
+  const onSubmit = (values: z.infer<typeof signInFormSchema>) => {
+    mutate(values);
   };
 
   const containerVariants = {

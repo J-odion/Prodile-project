@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
-import { set, z } from "zod";
+import { any, set, z } from "zod";
 import { useRouter } from "next/router";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signupFormSchema } from "@/lib/formSchema";
@@ -26,6 +26,7 @@ import { useAuth } from "../../../../context/auth.context";
 import { Loader2Icon } from "lucide-react";
 import { motion } from "framer-motion";
 import { Form, FormField } from "@/components/ui/form";
+import { useStorage } from "@/lib/useStorage";
 
 const Signup = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -69,6 +70,7 @@ const Signup = () => {
       email: data.email,
       password: data.password,
     };
+    useStorage.setItem('userEmail', payload.email);
     setIsLoading(true);
     mutation.mutate(payload);
   };

@@ -10,7 +10,7 @@ import { useToast } from "@/components/ui/use-toast";
 import CustomButton from "@/components/CustomButton";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { AuthConfirmOtp, AuthLogin } from "../../../../hooks/auth";
+import { AuthConfirmOtp} from "../../../../hooks/auth";
 import { useMutation } from "@tanstack/react-query";
 import {
   InputOTP,
@@ -28,12 +28,14 @@ import {
 import { motion } from "framer-motion";
 import { QUERY_KEYS } from "@/lib/utils";
 import { ConfirmOtpProps } from "../../../../hooks/auth/types";
+import { useStorage } from "@/lib/useStorage";
 
 const ConfirmEmail = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
   const router = useRouter();
-  const email = router.query.email as string;
+  // const email = router.query.email as string;
+  const email = useStorage.getItem("userEmail");
 
   const form = useForm<z.infer<typeof emailVerificationSchema>>({
     resolver: zodResolver(emailVerificationSchema),
@@ -88,38 +90,45 @@ const ConfirmEmail = () => {
     },
   };
 
-  const mutation = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationKey: [QUERY_KEYS.confirmOtp],
     mutationFn: (data: ConfirmOtpProps) => AuthConfirmOtp(data),
-    onSuccess: (data) => {
-      console.log(data);
+    onSuccess: () => {
       toast({
-        title: "Verification successful",
-        description: "You have successfully verified your email",
+        title: "OTP verified successfully!",
+        description: "You can now login to your account.",
         variant: "default",
       });
+      router.push("/auth/login");
     },
-    onError: (error: any) => {
-      setIsLoading(false);
-      console.log(error);
+    onError: (error) => {
+      console.error("Mutation error:", error);
       toast({
-        title: "Verification failed",
-        description: "An error occurred while verifying otp",
+        title: "Something went wrong!",
+        description: "Unable to verify OTP. Please try again.",
         variant: "destructive",
       });
     },
-  })
+  });
 
-
-  const onSubmit = async (data: z.infer<typeof emailVerificationSchema>) => {
-    console.log(data);
-    const payload = {
-      email: email,
-      otp: data.otp,
-    };
-    setIsLoading(true);
-    mutation.mutate(payload);
-    router.push("/auth/verifyOtp/success");
+  const onSubmit = (values: z.infer<typeof emailVerificationSchema>) => {
+    // const payload = {
+    //   email: email,
+    //   otp: values.otp,
+    // };
+    if (email !== null) {
+      const payload = {
+        email: email,
+        otp: values.otp,
+      };
+      mutate(payload);
+    } else {
+      toast({
+        title: "Something went wrong!",
+        description: "Unable to verify OTP. Please try again.",
+        variant: "destructive",
+      });
+    }
   };
 
   return (
@@ -225,8 +234,8 @@ const ConfirmEmail = () => {
               <CustomButton
                 type="submit"
                 className="w-full bg-[--prodile-yellow] h-10 rounded-xl text-lg font-normal text-white py-4"
-                isLoading={isLoading}
-                disabled={isLoading}
+                isLoading={isPending}
+                disabled={isPending}
               >
                 Continue
               </CustomButton>

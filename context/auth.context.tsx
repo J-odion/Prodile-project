@@ -6,14 +6,12 @@ import { setAccessToken, getAccessToken, setRefreshToken, getRefreshToken, remov
 
 type AuthType = {
   accessToken: string | null;
-  refreshToken: string | null;
-  setAuthTokens: (accessToken: string, refreshToken: string) => void;
+  setAuthTokens: (accessToken: string) => void;
   clearAuthTokens: () => void;
 };
 
 export const AuthContext = createContext<AuthType>({
   accessToken: null,
-  refreshToken: null,
   setAuthTokens: () => {},
   clearAuthTokens: () => {},
 });
@@ -26,30 +24,24 @@ const AuthProvider = ({ children }: React.PropsWithChildren) => {
   const router = useRouter();
 
   const [accessToken, setAccessTokenState] = useState<string | null>(getAccessToken());
-  const [refreshToken, setRefreshTokenState] = useState<string | null>(getRefreshToken());
 
 
   useEffect(() => {
     setAccessToken(accessToken ?? '');
-    setRefreshToken(refreshToken ?? '');
-  }, [accessToken, refreshToken]);
+  }, [accessToken]);
 
-  const setAuthTokens = (newAccessToken: string, newRefreshToken: string) => {
+  const setAuthTokens = (newAccessToken: string) => {
     setAccessTokenState(newAccessToken);
-    setRefreshTokenState(newRefreshToken);
   };
 
   const clearAuthTokens = () => {
     setAccessTokenState(null);
-    setRefreshTokenState(null);
     removeAccessToken();
-    removeRefreshToken();
   };
 
 
   const value: AuthType = {
     accessToken,
-    refreshToken,
     setAuthTokens,
     clearAuthTokens,
   };

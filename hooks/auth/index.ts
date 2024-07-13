@@ -67,7 +67,7 @@ export const AuthConfirmOtp = async (payload: {
 }) => {
   const config = {
     method: "POST",
-    url: `${process.env.NEXT_PUBLIC_API_URL}/otp/send-otp`,
+    url: `${process.env.NEXT_PUBLIC_API_URL}/api/auth/verify-otp`,
     data: payload,
   };
 

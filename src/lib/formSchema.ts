@@ -47,7 +47,7 @@ export const emailVerificationSchema = z.object({
     .min(6, {
       message: "otp must contain at least 6 character(s)",
     })
-    .max(5, {
+    .max(6, {
       message: "otp must contain at most 6 character(s)",
     }),
 });
