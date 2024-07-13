@@ -87,9 +87,7 @@ const ForgotPassword = () => {
 
   return (
     <div className="relative flex items-center justify-center min-h-screen bg-gradient-to-b from-green-400/5 to-yellow-400/15 overflow-hidden">
-      <div
-        className="absolute md:block hidden md:w-1/2 top-0 left-8 h-full lg:w-1/2"
-      >
+      <div className="absolute md:block hidden md:w-1/2 top-0 left-8 h-full lg:w-1/2">
         <Image
           src="/images/agricFarm.svg"
           alt="Agricultural Illustration Left"
@@ -116,53 +114,60 @@ const ForgotPassword = () => {
         animate="visible"
         className="relative z-10"
       >
-      <Card className="mx-auto max-w-sm z-10 bg-transparent lg:bg-white w-full py-8">
-      <CardHeader>
-          <CardTitle className="text-2xl">Reset Password</CardTitle>
-          <CardDescription>
-          Type in your registered email address to reset password
-          </CardDescription>
-        </CardHeader>
+        <Card className="mx-auto max-w-sm z-10 bg-white w-full py-8">
+          <CardHeader>
+            <CardTitle className="text-2xl">Reset Password</CardTitle>
+            <CardDescription>
+              Type in your registered email address to reset password
+            </CardDescription>
+          </CardHeader>
 
-        <CardContent>
-        <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className="grid gap-4"
-          >
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormRender
-                  placeholder="Enter email"
-                  field={field}
-                  label="Email Address"
-                />
-              )}
-            />
-
-            <div className="flex justify-center items-center flex-col gap-4">
-              <CustomButton
-                type="submit"
-                className="w-full bg-[--prodile-yellow] h-10 rounded-xl text-lg font-normal text-white py-4"
+          <CardContent>
+            <Form {...form}>
+              <motion.form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="grid gap-4"
+                variants={containerVariants}
+                initial="hidden"
+                animate="visible"
               >
-                Continue
-              </CustomButton>
-              <Link href="/auth/login">Back to login</Link>
+                <motion.div variants={itemVariants}>
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormRender
+                        placeholder="Enter email"
+                        field={field}
+                        label="Email Address"
+                      />
+                    )}
+                  />
+                </motion.div>
+                <motion.div variants={itemVariants}>
+                  <div className="flex justify-center items-center flex-col gap-4">
+                    <CustomButton
+                      type="submit"
+                      className="w-full bg-[--prodile-yellow] h-10 rounded-xl text-lg font-normal text-white py-4"
+                    >
+                      Continue
+                    </CustomButton>
+                    <Link href="/auth/login">Back to login</Link>
+                  </div>
+                </motion.div>
+              </motion.form>
+            </Form>
+          </CardContent>
+          <motion.div variants={itemVariants}>
+            <div className="text-xs mt-4 justify-center flex gap-6 items-center">
+              <ul className="flex gap-6 items-center">
+                <li>Terms and conditions</li>
+                <li className="bg-black h-[5px] w-[5px] rounded-full"></li>
+                <li>Privacy policy</li>
+              </ul>
             </div>
-          </form>
-        </Form>
-        </CardContent>
-
-        <div className="text-xs mt-4 justify-center flex gap-6 items-center">
-          <ul className="flex gap-6 items-center">
-            <li>Terms and conditions</li>
-            <li className="bg-black h-[5px] w-[5px] rounded-full"></li>
-            <li>Privacy policy</li>
-          </ul>
-        </div>
-      </Card>
+          </motion.div>
+        </Card>
       </motion.div>
       <motion.div
         initial={{ opacity: 0, y: 100 }}
