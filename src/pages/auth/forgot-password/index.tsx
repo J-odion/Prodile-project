@@ -11,8 +11,13 @@ import FormRender from "@/components/FormRender";
 import CustomButton from "@/components/CustomButton";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-
-// import GoogleSignInButton from '@/components/GoogleSignInButton';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 const ForgotPassword = () => {
   const { toast } = useToast();
@@ -40,50 +45,36 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row min-h-screen w-full relative">
-      <div className="w-full md:w-1/2 hidden md:flex relative">
+    <div className="relative flex items-center justify-center min-h-screen">
+      <div className="absolute md:block hidden md:w-1/2 top-0 left-8 h-full lg:w-1/4">
         <Image
-          src="/images/authBg.png"
+          src="/images/agricFarm.svg"
+          alt="Agricultural Illustration Left"
           layout="fill"
-          objectFit="cover"
-          alt="Background Image"
+          objectFit="contain"
         />
-        <div className="absolute left-6 top-6">
-          <Image
-            src="/images/prodile-logo-white.svg"
-            alt="prodile logo"
-            height={20}
-            width={150}
-          />
-        </div>
-        <div className="absolute inset-0 flex flex-col justify-center items-center text-white p-8 my-14 space-y-8">
-          <div className="flex flex-col items-center justify-center gap-4">
-            <h1 className="text-3xl lg:text-4xl font-bold mt-8 text-[--prodile-yellow] capitalize">
-              Agriculture matter
-            </h1>
-            <h3 className="text-xl lg:text-2xl font-semibold mt-4">
-              Good production
-            </h3>
-          </div>
-        </div>
-        <div className="absolute bottom-4 right-0 left-0">
-          <p className="text-center mt-4 text-[#BDBDBD] font-normal text-sm lg:text-lg">
-            Dissuade ecstatic and properly saw entirely sir why laughter endeavor. In on my jointure horrible margaret suitable he speedily.
-          </p>
-        </div>
       </div>
-      <div className="w-full md:w-1/2 flex flex-col justify-center items-center px-8 md:px-14 lg:px-24 py-14 md:py-0">
-        <h1 className="text-3xl lg:text-4xl font-semibold mb-2 text-[#0C1421]">
-          Reset Pasword
-        </h1>
-        <p className="text-[--prodile-text-darkBlue] font-normal text-medium lg:text-lg mb-6 text-center">
+      <div className="absolute hidden lg:block top-0 right-8 h-full w-1/4">
+        <Image
+          src="/images/globe.svg"
+          alt="Agricultural Illustration Right"
+          layout="fill"
+          objectFit="contain"
+        />
+      </div>
+      <Card className="mx-auto max-w-sm z-10 bg-transparent lg:bg-white w-full py-8">
+      <CardHeader>
+          <CardTitle className="text-2xl">Reset Password</CardTitle>
+          <CardDescription>
           Type in your registered email address to reset password
-        </p>
+          </CardDescription>
+        </CardHeader>
 
+        <CardContent>
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-4 md:mt-8 mt-4 w-full"
+            className="grid gap-4"
           >
             <FormField
               control={form.control}
@@ -108,6 +99,7 @@ const ForgotPassword = () => {
             </div>
           </form>
         </Form>
+        </CardContent>
 
         <div className="text-xs mt-4 justify-center flex gap-6 items-center">
           <ul className="flex gap-6 items-center">
@@ -116,7 +108,7 @@ const ForgotPassword = () => {
             <li>Privacy policy</li>
           </ul>
         </div>
-      </div>
+      </Card>
 
 
     </div>

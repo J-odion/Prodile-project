@@ -13,8 +13,7 @@ export const signInFormSchema = z.object({
 });
 
 export const signupFormSchema = z.object({
-  firstName: z.string(),
-  lastName: z.string(),
+  name: z.string(),
   email: z.string().email(),
   password: z
     .string()
@@ -39,9 +38,7 @@ export const resetPasswordSchema = z.object({
 
 
 export const confirmEmailSchema = z.object({
-  telephone: z.string().min(11, {
-    message: "Phone number must be at least 11 character(s) long",
-  }),
+  email: z.string().email(),
 })
 
 export const emailVerificationSchema = z.object({
