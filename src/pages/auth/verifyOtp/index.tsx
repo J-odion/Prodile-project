@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { Form, FormField, FormItem, FormControl } from "@/components/ui/form";
@@ -10,6 +10,8 @@ import { useToast } from "@/components/ui/use-toast";
 import CustomButton from "@/components/CustomButton";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { AuthConfirmOtp} from "../../../../hooks/auth";
+import { useMutation } from "@tanstack/react-query";
 import {
   InputOTP,
   InputOTPGroup,
@@ -24,17 +26,25 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { motion } from "framer-motion";
+import { QUERY_KEYS } from "@/lib/utils";
+import { ConfirmOtpProps } from "../../../../hooks/auth/types";
+import { useStorage } from "@/lib/useStorage";
 
 const ConfirmEmail = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
   const router = useRouter();
+  // const email = router.query.email as string;
+  const email = useStorage.getItem("userEmail");
 
   const form = useForm<z.infer<typeof emailVerificationSchema>>({
     resolver: zodResolver(emailVerificationSchema),
     defaultValues: {
-      otp_code: "",
+      otp: "",
     },
   });
+
+
 
   const handleBacktoLogin = () => {
     router.push("/auth/login");
@@ -80,15 +90,45 @@ const ConfirmEmail = () => {
     },
   };
 
+  const { mutate, isPending } = useMutation({
+    mutationKey: [QUERY_KEYS.confirmOtp],
+    mutationFn: (data: ConfirmOtpProps) => AuthConfirmOtp(data),
+    onSuccess: () => {
+      toast({
+        title: "OTP verified successfully!",
+        description: "You can now login to your account.",
+        variant: "default",
+      });
+      router.push("/auth/login");
+    },
+    onError: (error) => {
+      console.error("Mutation error:", error);
+      toast({
+        title: "Something went wrong!",
+        description: "Unable to verify OTP. Please try again.",
+        variant: "destructive",
+      });
+    },
+  });
 
-  const onSubmit = async (data: z.infer<typeof emailVerificationSchema>) => {
-    console.log(data);
-    toast({
-      title: "Reset password successful",
-      description: "You have successfully reset your password",
-      variant: "default",
-    });
-    router.push("/auth/verifyOtp/success");
+  const onSubmit = (values: z.infer<typeof emailVerificationSchema>) => {
+    // const payload = {
+    //   email: email,
+    //   otp: values.otp,
+    // };
+    if (email !== null) {
+      const payload = {
+        email: email,
+        otp: values.otp,
+      };
+      mutate(payload);
+    } else {
+      toast({
+        title: "Something went wrong!",
+        description: "Unable to verify OTP. Please try again.",
+        variant: "destructive",
+      });
+    }
   };
 
   return (
@@ -143,7 +183,7 @@ const ConfirmEmail = () => {
                 <motion.div variants={itemVariants}>
             <FormField
               control={form.control}
-              name="otp_code"
+              name="otp"
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
@@ -152,28 +192,33 @@ const ConfirmEmail = () => {
                       <InputOTPGroup className="space-x-4 flex justify-center">
                         <InputOTPSlot
                           index={0}
-                          {...form.register("otp_code")}
+                          {...form.register("otp")}
                           className="bg-[#1E1E1E0D]"
                         />
                         <InputOTPSlot
                           index={1}
-                          {...form.register("otp_code")}
+                          {...form.register("otp")}
                           className="bg-[#1E1E1E0D]"
                         />
                         <InputOTPSlot
                           index={2}
-                          {...form.register("otp_code")}
+                          {...form.register("otp")}
                           className="bg-[#1E1E1E0D]"
                         />
                         <InputOTPSeparator />
                         <InputOTPSlot
                           index={3}
-                          {...form.register("otp_code")}
+                          {...form.register("otp")}
                           className="bg-[#1E1E1E0D]"
                         />
                         <InputOTPSlot
                           index={4}
-                          {...form.register("otp_code")}
+                          {...form.register("otp")}
+                          className="bg-[#1E1E1E0D]"
+                        />
+                        <InputOTPSlot
+                          index={5}
+                          {...form.register("otp")}
                           className="bg-[#1E1E1E0D]"
                         />
                       </InputOTPGroup>
@@ -189,6 +234,8 @@ const ConfirmEmail = () => {
               <CustomButton
                 type="submit"
                 className="w-full bg-[--prodile-yellow] h-10 rounded-xl text-lg font-normal text-white py-4"
+                isLoading={isPending}
+                disabled={isPending}
               >
                 Continue
               </CustomButton>

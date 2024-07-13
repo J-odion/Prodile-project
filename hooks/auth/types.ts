@@ -13,5 +13,5 @@ export type SignUpProps = {
 
   export type ConfirmOtpProps = {
     email: string;
-    otp_code: string;
+    otp: string;
   };

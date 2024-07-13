@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
-import { set, z } from "zod";
+import { any, set, z } from "zod";
 import { useRouter } from "next/router";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signupFormSchema } from "@/lib/formSchema";
@@ -26,8 +26,10 @@ import { useAuth } from "../../../../context/auth.context";
 import { Loader2Icon } from "lucide-react";
 import { motion } from "framer-motion";
 import { Form, FormField } from "@/components/ui/form";
+import { useStorage } from "@/lib/useStorage";
 
 const Signup = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
   const router = useRouter();
 
@@ -49,9 +51,10 @@ const Signup = () => {
         description: "Please confirm your email to continue",
         variant: "default",
       });
-      router.push("/auth/confirm-email");
+      router.push("/auth/verifyOtp");
     },
     onError: (error: any) => {
+      setIsLoading(false);
       console.log(error);
       toast({
         title: "Signup failed",
@@ -67,6 +70,8 @@ const Signup = () => {
       email: data.email,
       password: data.password,
     };
+    useStorage.setItem('userEmail', payload.email);
+    setIsLoading(true);
     mutation.mutate(payload);
   };
 
@@ -226,8 +231,8 @@ const Signup = () => {
                 <CustomButton
                   type="submit"
                   className="w-full bg-[--prodile-yellow] h-10 rounded-xl text-lg font-normal text-white py-4"
-                  isLoading={form.formState.isSubmitting}
-                  disabled={form.formState.isSubmitting}
+                  isLoading={isLoading}
+                  disabled={isLoading}
                 >
                   Signup
                 </CustomButton>
