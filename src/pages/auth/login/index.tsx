@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { Form, FormField } from "@/components/ui/form";
@@ -10,6 +10,8 @@ import { useToast } from "@/components/ui/use-toast";
 import FormRender from "@/components/FormRender";
 import CustomButton from "@/components/CustomButton";
 import Link from "next/link";
+import { useMutation } from "@tanstack/react-query";
+import { AuthLogin } from "../../../../hooks/auth";
 import {
   Card,
   CardContent,
@@ -20,6 +22,7 @@ import {
 import { motion } from "framer-motion";
 
 const Login = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
   const router = useRouter();
 
@@ -31,14 +34,33 @@ const Login = () => {
     },
   });
 
+  const mutation = useMutation({
+    mutationFn: AuthLogin,
+    onSuccess: () => {
+      toast({
+        title: "Login successful",
+        variant: "default",
+      });
+      router.push("/dashboard");
+    },
+    onError: (error: any) => {
+      console.log(error);
+      setIsLoading(false);
+      toast({
+        title: "Login failed",
+        description: "An error occurred while logging in",
+        variant: "destructive",
+      });
+    },
+  });
+
   const onSubmit = async (data: z.infer<typeof signInFormSchema>) => {
-    console.log(data);
-    toast({
-      title: "Login successful",
-      description: "You have successfully logged in",
-      variant: "default",
-    });
-    router.push("/dashboard");
+    const payload = {
+      email: data.email,
+      password: data.password,
+    };
+    setIsLoading(true);
+    mutation.mutate(payload);
   };
 
   const containerVariants = {
@@ -169,6 +191,8 @@ const Login = () => {
                   <CustomButton
                     type="submit"
                     className="w-full bg-[--prodile-yellow] h-10 rounded-xl text-lg font-normal text-white py-4"
+                    isLoading={isLoading}
+                    disabled={isLoading}
                   >
                     Login
                   </CustomButton>

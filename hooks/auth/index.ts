@@ -63,7 +63,7 @@ export const VerifyEmail = async (payload: {
 
 export const AuthConfirmOtp = async (payload: {
   email: string;
-  otp_code: string;
+  otp: string;
 }) => {
   const config = {
     method: "POST",
