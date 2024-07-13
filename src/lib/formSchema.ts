@@ -38,9 +38,7 @@ export const resetPasswordSchema = z.object({
 
 
 export const confirmEmailSchema = z.object({
-  telephone: z.string().min(11, {
-    message: "Phone number must be at least 11 character(s) long",
-  }),
+  email: z.string().email(),
 })
 
 export const emailVerificationSchema = z.object({
