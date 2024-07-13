@@ -65,7 +65,7 @@ const Success = () => {
           objectFit="contain"
         /> */}
       </div>
-      <motion.div
+      {/* <motion.div
         variants={rotatingVariants}
         animate="rotate"
         className="absolute hidden lg:block top-0 right-8 h-full w-1/4"
@@ -76,7 +76,7 @@ const Success = () => {
           layout="fill"
           objectFit="contain"
         />
-      </motion.div>
+      </motion.div> */}
       <motion.div
         variants={containerVariants}
         initial="hidden"
